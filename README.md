@@ -124,7 +124,7 @@ Service Worker，如果有用过pwa的应该会有所了解，ServiceWorker是PW
 ```javascript
     // workbox-sw.js
     
-    importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js')
+    importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0/workbox-sw.js')
 ```
 
 
@@ -157,6 +157,14 @@ workbox-sw在哪里找到这些文件。如果你把文件放在/ third_party / 
 ![Image text](https://raw.githubusercontent.com/gla-TBG/image-storage/master/workbox-study/2.2.png)
 
 workbox的主要功能之一是路由和缓存策略模块。它允许你监听来之网页的请求，并提供多种策略来处理你的请求
+
+```javascript
+    // skipWaiting() ，为了在页面更新的过程当中，新的 SW 脚本能够立刻激活和生效
+    workbox.skipWaiting();
+
+    // clientsClaim() 在新安装的 SW 后，打开页面都会使用版本更新的缓存。
+    workbox.clientsClaim();
+```
 
 一个简单的例子，缓存所有js文件
 ```javascript
@@ -256,7 +264,7 @@ workbox.routing.registerRoute(
  
     workbox.routing.registerRoute(
         new RegExp('.*\.js'),
-        new workbox.strategies.StaleWhileRevalidate()
+        workbox.strategies.staleWhileRevalidate()
     );
 ```
 ![Image text](https://github.com/gla-TBG/image-storage/blob/master/workbox-study/3.1-1.png?raw=true)
@@ -273,7 +281,7 @@ workbox.routing.registerRoute(
 
     workbox.routing.registerRoute(
         new RegExp('.*\.js'),
-        new workbox.strategies.CacheFirst()
+        workbox.strategies.cacheFirst()
     );
 ```
 ![Image text](https://github.com/gla-TBG/image-storage/blob/master/workbox-study/3.1-2.png?raw=true)
@@ -292,7 +300,7 @@ workbox.routing.registerRoute(
     
     workbox.routing.registerRoute(
         new RegExp('.*\.js'),
-        new workbox.strategies.NetworkFirst()
+        workbox.strategies.networkFirst()
     );
 ```
 ![Image text](https://github.com/gla-TBG/image-storage/blob/master/workbox-study/3.1-3.png?raw=true)
@@ -306,7 +314,7 @@ workbox.routing.registerRoute(
 
     workbox.routing.registerRoute(
       new RegExp('.*\.js'),
-      new workbox.strategies.NetworkOnly()
+      workbox.strategies.networkOnly()
     );
 ```
 ![Image text](https://github.com/gla-TBG/image-storage/blob/master/workbox-study/3.1-4.png?raw=true)
@@ -322,7 +330,7 @@ workbox.routing.registerRoute(
 
     workbox.routing.registerRoute(
       new RegExp('.*\.js'),
-      new workbox.strategies.CacheOnly()
+      workbox.strategies.cacheOnly()
     );
 
 ```
@@ -344,7 +352,7 @@ workbox.routing.registerRoute(
 
     workbox.routing.registerRoute(
         new RegExp('.*\.js'),
-        new workbox.strategies.StaleWhileRevalidate({
+        workbox.strategies.staleWhileRevalidate({
             cacheName: 'js-cache', // 缓存名字
         })
     );
@@ -356,7 +364,7 @@ workbox.routing.registerRoute(
 ```javascript
     workbox.routing.registerRoute(
         new RegExp('.*\.js'),
-        new workbox.strategies.CacheFirst({
+        workbox.strategies.cacheFirst({
             cacheName: 'js-cache', // 缓存名字
             plugins: [
                 new workbox.expiration.Plugin({
@@ -375,7 +383,7 @@ workbox.routing.registerRoute(
 ```javascript
     workbox.routing.registerRoute(
         new RegExp('.*\.js'),
-        new workbox.strategies.CacheFirst({
+        workbox.strategies.cacheFirst({
             cacheName: 'js-cache', // 缓存名字
             plugins: [
                 new workbox.cacheableResponse.Plugin({
