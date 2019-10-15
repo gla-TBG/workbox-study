@@ -3,7 +3,9 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-      <img src="./assets/logo2.png" alt="">
+      <div>
+        <img src="./assets/logo.png" alt="">
+      </div>
     </div>
     <router-view/>
   </div>
