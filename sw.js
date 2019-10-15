@@ -1,4 +1,4 @@
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js');
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0/workbox-sw.js');
 
 if (workbox) {
     console.log(`Yay! Workbox is loaded 🎉`);
@@ -109,7 +109,7 @@ workbox.clientsClaim();
 
 workbox.routing.registerRoute(
     new RegExp(/./),
-    new workbox.strategies.StaleWhileRevalidate({
+    workbox.strategies.staleWhileRevalidate({
         cacheName: 'cache', // 缓存名字
         plugins: [
             new workbox.expiration.Plugin({
