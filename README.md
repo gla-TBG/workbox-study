@@ -1,11 +1,39 @@
 # workbox学习笔记
 
-## 一 介绍
-> 1.1 学习workbox之前先了解一下Service Worker
+## 一 PWA介绍
+> 1.1 学习workbox之前先了解一下PWA（如果了解请跳过）
 
+PWA（ 全称：Progressive Web App ）也就是说这是个渐进式的网页应用程序。一个 PWA 应用首先是一个网页, 可以通过
+Web 技术编写出一个网页应用. 随后添加上Manifest 和 Service Worker 来实现 PWA 的安装和离线等功能。
+而ServiceWorker是PWA中最重要的一部分，它就像是一个网站安插在用户浏览器中的大脑。Service Worker是这样被注册
+在页面上的。
 
-Service Worker，如果有用过pwa的应该会有所了解，ServiceWorker是PWA中最重要的一部分，
-它就像是一个网站安插在用户浏览器中的大脑。Service Worker是这样被注册在页面上的。
+```$xslt
+
+    对比原生应用
+    原生应用：
+    •	使用原生SDK和开发工具开发
+    •	需要考虑跨平台，不同系统往往需要独立开发
+    •	需要发布到应用商店才能下载使用
+    •	可以安装到手机主屏，生成应用图标
+    •	直接运行于操作系统上，访问系统资源方便
+    •	可以离线使用
+    •	可以获取消息通知
+    PWA应用：
+    •	使用HTML，CSS，JS开发
+    •	无需考虑跨平台，只需要考虑浏览器兼容性
+    •	通过url访问，无需发布到应用商店
+    •	可以安装到手机主屏，生成应用图标
+    •	运行于浏览器中，可访问系统资源
+    •	可以离线使用
+    •	可以获取消息通知
+```
+
+基于https
+
+HTTPS 不仅仅可以保证你网页的安全性，还可以让一些比较敏感的 API 完美的使用。值得一提的是，SW 是基于 HTTPS 的，
+所以，如果你的网站不是 HTTPS，那么基本上你也别想了 SW。但是在因为方便开发者在本地测试，在本地调试时支持
+localhost和127.0.0.1本地域名
 
 ```javascript
    if(navigator.serviceWorker!=null){//判断是否支持serviceWorker
@@ -109,9 +137,9 @@ Service Worker，如果有用过pwa的应该会有所了解，ServiceWorker是PW
  
  workBox由许多node模块和插件库组成的一个库，可以轻松缓存资产并充分利Service Worker的
  特性用于构建Progressive Web Apps的功能。workbox的出现就是为了解决上述sw的问题的，它
- 被定义为PWA相关的工具集合其实可以把workbox理解为Google官方PWA框架，它解决的就是用底
- 层API写PWA太过复杂的问题。这里说的底层API，指的就是去监听SW的install, active, fetch
- 事件做相应逻辑处理等。
+ 被定义为PWA相关的工具集合其实可以把workbox理解为Google官方PWA框架，因此workbox也是
+ 基于https的，它解决的就是用底层API写PWA太过复杂的问题。这里说的底层API，指的就是去监听
+ SW的install, active, fetch事件做相应逻辑处理等。
  
 
 # 二 使用workbox
