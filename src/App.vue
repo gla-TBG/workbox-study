@@ -4,7 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
       <div>
-        <img src="./assets/logo.png" alt="">
+        <img src="./assets/logo2.png" alt="">
       </div>
     </div>
     <router-view/>
