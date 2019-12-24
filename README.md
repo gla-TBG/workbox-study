@@ -130,7 +130,26 @@ localhost和127.0.0.1本地域名
 其实所有站点SW的install和active都差不多，无非是做预缓存资源列表，更新后缓存清理的工作，
 逻辑不太复杂，而重点在于fetch事件。上面的代码，我把fetch事件的逻辑省略了，因为如果认真
 写的话，太多了，而且也不利于讲明白缓存策略这件事。想象一下，你需要根据不同文件的扩展名
-把不同的资源通过不同的策略缓存在caches中，各种css，js，html，图片，都需要单独搞一套缓
+把不同的资源通过不同的策略缓存在caches中，各种css，js，html，图片，都需要单独搞一套缓存
+
+
+保存到桌面
+
+Pwa有一个很方便的功能能就是将页面以快捷图标的方式保存到桌面，使得一个它更加接近原生app，实现这种方式需要满足三个条件：
+
+```$xslt
+•	包含一个 manifest.json 文件，其中包含 short_name 以及 icons 字段
+•	包含 service workers
+•	使用 HTTPS（这个好像是废话，既然使用了 service workers，那肯定已经基于 https了）
+```
+从上面 3 点可以看到，如果你的应用已经是个 PWA 应用的话，那么，第二，第三点就已经满足了，添加至桌面的功能其实只需为项目添加一个描述性的配置文件 manifest.json 就可以了。
+
+那 manifest.json 这东西到底是啥？
+它是 PWA 的一部分，是一个 JSON 格式的文件用来描述应用相关的信息，目的是提供将应用添加至桌面的功能，从而使用户可以无需下载就可以如应用一般从桌面打开 web 应用，大大增强用户体验和粘性。
+
+以下是mainfest的一些参数解析：
+![Image text](https://github.com/gla-TBG/image-storage/blob/master/workbox-study/3.4-2.png?raw=true)
+
 
 
  > 1.2 什么是workbox？
